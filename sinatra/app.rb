@@ -3,6 +3,7 @@ require 'payjp'
 
 set :secret_key, ENV['SECRET_KEY']
 set :public_key, ENV['PUBLIC_KEY']
+set :client_id, ENV['CLIENT_ID']
 
 Payjp.api_key = settings.secret_key
 
@@ -20,6 +21,8 @@ post '/pay' do
     :email => 'example@pay.jp',
     :card  => params['payjp-token']
   )
+  puts params
+  puts customer
   Payjp::Charge.create(
       :amount => amount,
       :currency => 'jpy',
